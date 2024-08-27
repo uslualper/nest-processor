@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+    api:
+        container_name: nest-processor
+        build:
+            context: .
+            target: ${APP_MODE}
+            dockerfile: ./docker/dev.dockerfile
+        env_file:
+            - .env
+        networks:
+            - nest-network
+        volumes:
+            - ./:/app
+            - /app/node_modules
+
+networks:
+    nest-network:
+        name: nest-network
+        driver: bridge
